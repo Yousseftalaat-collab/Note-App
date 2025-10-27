@@ -12,7 +12,7 @@ This project focuses on elegant design, smooth animations, and a delightful user
 <div align="center">
     <img src="./screenshot-light.png" width="800" alt="Notes App Light Mode Preview"/>
   <br><br>
-  <img src="./screenshot-dark.png" width="800" alt="Notes App Dark Mode Preview"/>
+  <img src="./screenshot-Dark.png" width="800" alt="Notes App Dark Mode Preview"/>
 </div>
 
 <hr>
