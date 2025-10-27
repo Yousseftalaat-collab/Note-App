@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Aclonica&display=swap"
+      rel="stylesheet"
+    />
+    <title>Almdrasa Notes</title>
+    <link
+      rel="page icon"
+      href="./assets/14-140871_icon-note-png-notes-app-icon-png-clipart.png"
+      type="image/png"
+    />
+    <link href="./styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- MOBILE HEADER -->
+    <header class="mobile-header" role="banner">
+      <!-- Burger -->
+      <button
+        id="mobileBurger"
+        class="mobile-burger"
+        aria-label="Open menu"
+        aria-expanded="false"
+      >
+        <span class="burger-line line1"></span>
+        <span class="burger-line line2"></span>
+        <span class="burger-line line3"></span>
+      </button>
+
+      <!-- Brand -->
+      <h1 class="mobile-brand">Almdrasa-Notes</h1>
+
+      <!-- Actions -->
+      <div class="mobile-actions">
+        <button id="mobileSearchBtn" class="icon-btn" aria-label="Search">
+          <img src="./assets/icons8-search.svg" />
+        </button>
+        <button
+          id="mobileThemeToggle"
+          class="icon-btn"
+          aria-pressed="false"
+          aria-label="Toggle theme"
+        >
+          <span class="theme-icon" id="themeIcon">🌙</span>
+        </button>
+      </div>
+
+      <!-- Inline search (hidden until toggled) -->
+      <div class="mobile-search-wrap hidden" id="mobileSearchWrap">
+        <input
+          id="searchInputMobile"
+          type="search"
+          class="mobile-search-input"
+          placeholder="Search notes..."
+        />
+        <button
+          id="mobileSearchClose"
+          class="icon-btn"
+          aria-label="Close search"
+        >
+          ✕
+        </button>
+      </div>
+
+      <!-- Slide-in mobile menu -->
+      <nav id="mobileMenu" class="mobile-menu hidden" aria-hidden="true">
+        <div class="mobile-menu-header">
+          <div class="mobile-menu-title"></div>
+          <button id="mobileCloseMenu" class="icon-btn close-mobile">✕</button>
+        </div>
+
+        <ul class="mobile-menu-list">
+          <li><button id="mobileBtnNotes" class="menu-btn">Notes</button></li>
+          <li><button id="mobileBtnAdd" class="menu-btn">Add Note</button></li>
+        </ul>
+      </nav>
+
+      <div class="mobile-overlay" id="mobileOverlay"></div>
+    </header>
+
+    <div class="app">
+      <!-- LEFT SIDEBAR -->
+      <aside class="sidebar">
+        <header class="sidebar-header">
+          <h1 class="brand">Almdrasa-Notes</h1>
+          <div class="search-wrapper">
+            <img
+              src="./assets/icons8-search.svg"
+              alt="search"
+              class="search-icon"
+            />
+            <input id="searchInput" type="search" placeholder="Search" />
+          </div>
+        </header>
+
+        <nav class="menu">
+          <button id="btnNotes" class="menu-btn active">Notes</button>
+          <button id="btnAdd" class="menu-btn">Add Notes</button>
+        </nav>
+      </aside>
+
+      <!-- NOTES SIDEBAR (second slide) -->
+      <aside id="notesSidebar" class="notes-sidebar hidden">
+        <div class="notes-section pinned-section">
+          <h3>Pinned</h3>
+          <div id="pinnedNotesContainer">
+            <!-- Pinned notes will appear here via JS -->
+          </div>
+        </div>
+
+        <div class="notes-section normal-section">
+          <h3>Notes</h3>
+          <div id="normalNotesContainer">
+            <!-- Normal notes will appear here via JS -->
+          </div>
+        </div>
+
+        <button class="all-posts-btn">All Posts</button>
+      </aside>
+
+      <button id="closeNotesSidebar" class="close-btn-outside hidden">
+        <img src="./assets/Icon color.png" alt="close" />
+      </button>
+
+      <!-- MAIN CONTENT -->
+      <main class="main-content">
+        <!-- NOTE DETAIL VIEW -->
+        <section id="noteDetail" class="detail-view" contenteditable="true">
+          <div id="detailPlaceholder">Select a note to view details</div>
+          <article id="noteContent" class="note-content hidden">
+            <h2 id="noteTitle"></h2>
+            <p class="meta">
+              <span id="noteDate"></span> / By <span id="noteAuthor"></span>
+            </p>
+            <div id="noteBody"></div>
+            <div class="actions">
+              <button id="btnEdit">Edit</button>
+              <button id="btnDelete">Delete</button>
+              <button id="btnHighlight" class="pen-btn">🖊️</button>
+              <div id="colorPicker" class="color-picker hidden">
+                <span data-color="#f9f871" style="background: #f9f871"></span>
+                <span data-color="#a3f7bf" style="background: #a3f7bf"></span>
+                <span data-color="#a0c4ff" style="background: #a0c4ff"></span>
+                <span data-color="#ffafcc" style="background: #ffafcc"></span>
+                <span data-color="#ffd6a5" style="background: #ffd6a5"></span>
+                <span data-color="#bdb2ff" style="background: #bdb2ff"></span>
+                <span data-color="#caffbf" style="background: #caffbf"></span>
+                <input
+                  type="color"
+                  id="customColor"
+                  title="Choose your color"
+                />
+              </div>
+              <button id="btnTextColor" class="pen-btn text-color">🎨</button>
+              <div id="textColorPicker" class="color-picker hidden">
+                <span data-color="#ff0000" style="background: #ff0000"></span>
+                <span data-color="#00bfff" style="background: #00bfff"></span>
+                <span data-color="#008000" style="background: #008000"></span>
+                <span data-color="#ffa500" style="background: #ffa500"></span>
+                <span data-color="#800080" style="background: #800080"></span>
+                <input
+                  type="color"
+                  id="customTextColor"
+                  title="Pick custom text color"
+                />
+              </div>
+            </div>
+          </article>
+          <button id="floatingAdd" class="floating-add">
+            <img src="./assets/Vector.png" alt="add icon" />
+          </button>
+        </section>
+
+        <!-- ADD NOTE VIEW -->
+        <section id="addNoteView" class="add-view hidden">
+          <h2>Add Note</h2>
+          <form id="addNoteForm">
+            <label>Title*<input id="inputTitle" required /></label>
+            <label>Author*<input id="inputAuthor" required /></label>
+            <label
+              >Your Note*<textarea id="inputBody" required></textarea>
+            </label>
+            <div class="form-actions">
+              <button type="submit" id="btnAddNote">Add Note</button>
+              <button type="button" id="btnAddPinned">Add pinned note</button>
+            </div>
+          </form>
+        </section>
+      </main>
+    </div>
+
+    <script type="module" src="./scripts/main.js"></script>
+  </body>
+</html>
